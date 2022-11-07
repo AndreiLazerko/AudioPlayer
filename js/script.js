@@ -1,7 +1,7 @@
-// const API_URL = 'http://localhost:3024/';
+const API_URL = 'http://localhost:3024/';
 
-import dataMusic from '../js/tracks.js'
-// let dataMusic = []
+// import dataMusic from '../js/tracks.js'
+let dataMusic = []
 let playlist = []
 
 const favoriteList = localStorage.getItem('favorite')
@@ -24,6 +24,8 @@ const catalogContainer = document.querySelector('.catalog__container');
 const playerProgressInput = document.querySelector('.player__progress-input');
 const playerTimePassed = document.querySelector('.player__time-passed');
 const playerTimeTotal = document.querySelector('.player__time-total');
+
+const search = document.querySelector('.search');
 
 
 const catalogAddBtn = document.createElement('button');
@@ -73,11 +75,12 @@ const playMusic = (e) => {
     i = index;
     return id === item.id
   })
-  audio.src = track.mp3;
+  audio.src = `${API_URL}${track.mp3}`;
   
   audio.play();
   pauseBtn.classList.remove('player_icon-play');
   player.classList.add('player_active');
+  player.dataset.idTrack = id;
 
   const prevTrack = i === 0 ? playlist.length - 1 : i - 1;
   const nextTrack = i + 1 === playlist.length ? 0 : i + 1;
@@ -114,11 +117,17 @@ const createCard = (data) => {
   const card = document.createElement('a');
   card.href = '#'
   card.classList.add('catalog__item', 'track');
+  if(player.dataset.idTrack === data.id){
+    card.classList.add('track_active');
+    if(audio.paused){
+      card.classList.add('track_pause')
+    }
+  }
   card.dataset.idTrack = data.id;
 
   card.innerHTML = `
   <div class="track__img-wrap">
-    <img src="${data.poster}" alt="${data.artist} - ${data.track}" class="track__poster" width="180" height="180">
+    <img src="${API_URL}${data.poster}" alt="${data.artist} - ${data.track}" class="track__poster" width="180" height="180">
   </div>
   <div class="track__info track-info">
     <p class="track-info__title">${data.track}</p>
@@ -168,7 +177,7 @@ const init = async () => {
   audio.volume = localStorage.getItem('volume') || 1;
   playerVolumeInput.value = audio.volume * 100;
 
-  // dataMusic = await fetch(`${API_URL}api/music`).then((data) => data.json())
+  dataMusic = await fetch(`${API_URL}api/music`).then((data) => data.json())
 
   renderCatalog(dataMusic);
   checkCount();
@@ -192,7 +201,6 @@ const init = async () => {
   playerProgressInput.addEventListener('change', ()=> {
     const progress = playerProgressInput.value;
     audio.currentTime = (progress / playerProgressInput.max) * audio.duration;
-    console.log('progress: ', audio.currentTime);
   });
 
   favoriteBtn.addEventListener('click', () => {
@@ -234,6 +242,15 @@ const init = async () => {
       playerVolumeInput.value = audio.volume * 100;
       muteBtn.classList.remove('player__icon_mute-off')
     }
+  });
+
+  search.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    playlist = await fetch(`${API_URL}api/music?search=${search.search.value}`).then((data) => data.json())
+
+    renderCatalog(playlist);
+    checkCount();
   })
 }
 
