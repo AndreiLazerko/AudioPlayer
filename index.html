@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/icon_favi/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/icon_favi/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/icon_favi/favicon-16x16.png">
+  <link rel="manifest" href="images/icon_favi/site.webmanifest">
+  <link rel="mask-icon" href="images/icon_favi/safari-pinned-tab.svg" color="#08a1f2">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ff730e">
+  <link rel="stylesheet" href="css/style.css">
+
+  <title>AudioPlayer</title>
+   
+  <script src="js/script.js" defer type="module"></script> <!-- defer - Для того, чтобы <script> сразу запускался -->
+</head>
+<body>
+  <header class="header">
+    <h1 class="visually-hidden">Methed.Music</h1>
+    <div class="header__container">
+      <img class="header-logo" src="images/header/logo.svg" alt="logo">
+      <form class="header__search search">
+        <input class="search__input" type="search">
+        <button class="search__btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.5 14H14.71L14.43 13.73C15.41 12.59 16 11.11 16 9.5C16 5.91 13.09 3 9.5 3C5.91 3 3 5.91 3 9.5C3 13.09 5.91 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z"/>
+          </svg>    
+        </button>
+      </form>
+      <button class="header__favorite-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24"  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <section class="catalog">
+    <h2 class="visually-hidden">Список треков</h2>
+
+    <div class="catalog__container">
+     
+    </div>
+
+  </section>
+
+  <section class="player">
+    <h2 class="visually-hidden">Плеер</h2>
+
+    <div class="player__container">
+      <div class="player__track-info track-info track-info_mobile">
+        <p class="track-info__title">Frozen</p>
+        <p class="track-info__artist">Madonna</p>
+      </div>
+      <div class="player__controller">
+        <button class="player_icon player_icon-stop  player_controller-stop"></button>
+        <button class="player_icon player_icon-prev  player_controller-prev"></button>
+        <button class="player_icon player_icon-pause  player_controller-pause"></button>
+        <button class="player_icon player_icon-next  player_controller-next"></button>
+        <button class="player_icon player_icon-like  player_controller-like"></button>
+      </div>
+
+      <div class="player__progress-wrap">
+        <div class="player__progress">
+          <input type="range" class="player__progress-input" min="0" max="1000" value="0">
+        </div>
+
+        <p class="player_time">
+          <span class="player__time-passed">-:--</span>
+          <span>/</span>
+          <span class="player__time-total">-:--</span>
+        </p>
+      </div>
+
+      <div class="player__volume-wrap">
+        <div class="player__volume">
+          <input type="range" class="player__volume-input" min="0" max="100" value="90">
+        </div>
+        <button class="player__icon player__icon_mute player_controller-mute"></button>
+      </div>
+    </div>
+    
+  </section>
+   
+  <!-- <script src="js/script.js"></script> -->
+</body>
+</html>
