@@ -1,8 +1,8 @@
+import dataMusic from '../js/tracks.js'
 (() => {
   const API_URL = 'http://localhost:3024/';
 
-  // import dataMusic from '../js/tracks.js'
-  let dataMusic = []
+  // let dataMusic = []
   let playlist = []
   
   const favoriteList = localStorage.getItem('favorite')
@@ -70,7 +70,7 @@
       i = index;
       return id === item.id
     })
-    audio.src = `${API_URL}${track.mp3}`;
+    audio.src = track.mp3;
     trackTitle.textContent = track.track;
     trackArtist.textContent = track.artist;
     
@@ -114,7 +114,7 @@
   
     card.innerHTML = `
     <div class="track__img-wrap">
-      <img src="${API_URL}${data.poster}" alt="${data.artist} - ${data.track}" class="track__poster" width="180" height="180">
+      <img src="${data.poster}" alt="${data.artist} - ${data.track}" class="track__poster" width="180" height="180">
     </div>
     <div class="track__info track-info">
       <p class="track-info__title">${data.track}</p>
@@ -245,20 +245,20 @@
       }
     });
   
-    search.addEventListener('submit', async (event) => {
+    search.addEventListener('submit', event => {
       event.preventDefault();
   
-      playlist = await fetch(`${API_URL}api/music?search=${search.search.value}`).then((data) => data.json())
+      // playlist = await fetch(`${API_URL}api/music?search=${search.search.value}`).then((data) => data.json())
   
       renderCatalog(playlist);
     })
   }
 
-  const init = async () => {    
+  const init = () => {    
     audio.volume = localStorage.getItem('volume') || 1;
     playerVolumeInput.value = audio.volume * 100;
   
-    dataMusic = await fetch(`${API_URL}api/music`).then((data) => data.json())
+    // dataMusic = await fetch(`${API_URL}api/music`).then((data) => data.json())
   
     renderCatalog(dataMusic);
     addEventListener();
