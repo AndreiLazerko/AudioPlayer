@@ -126,6 +126,10 @@
   
   const renderCatalog = (dataList) => {
     playlist = [...dataList]; 
+    if(!playlist.length){
+      catalogContainer.innerHTML = 'Ничего нет!';
+      return;
+    }
     catalogContainer.textContent = '';
     const listCards = dataList.map(createCard);
     catalogContainer.append(...listCards);
